@@ -1,2 +1,0 @@
-# xspace-sailor
-xspace-sailor

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>X-Space Sailor · Sailor Piece Roblox</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Exo 2',sans-serif;background:#0A0510;color:#F0E0FF;}
+
+    /* AUTH */
+    #auth-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;}
+    #auth-screen::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 20%,rgba(192,79,255,0.12) 0%,transparent 65%);pointer-events:none;}
+    .auth-box{background:#0D0718;border:0.5px solid #2A1040;border-radius:10px;padding:40px 36px;width:100%;max-width:380px;position:relative;}
+    .auth-logo{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;letter-spacing:2px;color:#C04FFF;text-align:center;margin-bottom:4px;}
+    .auth-logo span{color:#FF2D2D;}
+    .auth-tagline{font-size:11px;color:#9A6FBB;text-align:center;letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;}
+    .auth-tabs{display:flex;border:0.5px solid #2A1040;border-radius:4px;margin-bottom:24px;overflow:hidden;}
+    .auth-tab{flex:1;padding:10px;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-family:'Exo 2',sans-serif;background:transparent;border:none;color:#9A6FBB;cursor:pointer;transition:all 0.2s;}
+    .auth-tab.active{background:#C04FFF;color:#0A0510;font-weight:500;}
+    .auth-field{margin-bottom:14px;}
+    .auth-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#9A6FBB;display:block;margin-bottom:6px;}
+    .auth-input{width:100%;background:#130A22;border:0.5px solid #2A1040;border-radius:4px;padding:11px 14px;font-size:13px;font-family:'Exo 2',sans-serif;color:#F0E0FF;outline:none;transition:border-color 0.2s;}
+    .auth-input:focus{border-color:#C04FFF;}
+    .auth-input::placeholder{color:#4A2A6A;}
+    .auth-btn{width:100%;background:#C04FFF;color:#0A0510;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:2px;padding:13px;border-radius:4px;border:none;cursor:pointer;text-transform:uppercase;margin-top:6px;transition:background 0.2s;}
+    .auth-btn:hover{background:#D47FFF;}
+    .auth-error{font-size:11px;color:#FF2D2D;text-align:center;margin-top:8px;min-height:16px;}
+    .auth-success{font-size:11px;color:#25D366;text-align:center;margin-top:8px;min-height:16px;}
+    .adm-link{font-size:10px;color:#4A2A6A;text-align:center;margin-top:14px;cursor:pointer;letter-spacing:1px;text-decoration:underline;}
+    .adm-link:hover{color:#9A6FBB;}
+
+    /* NAV */
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;border-bottom:0.5px solid #2A1040;background:rgba(10,5,16,0.97);position:sticky;top:0;z-index:10;flex-wrap:wrap;gap:8px;}
+    .logo{font-family:'Orbitron',monospace;font-size:15px;font-weight:900;letter-spacing:2px;color:#C04FFF;}
+    .logo span{color:#FF2D2D;}
+    .nav-links{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+    .nav-link{font-size:11px;color:#9A6FBB;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s;}
+    .nav-link:hover{color:#C04FFF;}
+    .nav-user{font-size:11px;color:#C04FFF;font-family:'Orbitron',monospace;letter-spacing:1px;}
+    .nav-logout{font-size:10px;padding:5px 10px;border-radius:3px;cursor:pointer;border:0.5px solid #FF2D2D;color:#FF2D2D;background:transparent;font-family:'Exo 2',sans-serif;transition:all 0.2s;}
+    .nav-logout:hover{background:#FF2D2D;color:#0A0510;}
+    .nav-wa{font-size:10px;padding:6px 12px;border-radius:3px;cursor:pointer;border:0.5px solid #25D366;color:#25D366;background:transparent;font-family:'Exo 2',sans-serif;transition:all 0.2s;}
+    .nav-wa:hover{background:#25D366;color:#0A0510;}
+    .cart-btn{font-size:10px;padding:6px 12px;border-radius:3px;cursor:pointer;border:0.5px solid #C04FFF;color:#C04FFF;background:transparent;font-family:'Exo 2',sans-serif;transition:all 0.2s;position:relative;}
+    .cart-btn:hover{background:#C04FFF;color:#0A0510;}
+    .cart-badge{position:absolute;top:-6px;right:-6px;background:#FF2D2D;color:#fff;border-radius:50%;width:16px;height:16px;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700;}
+
+    /* HERO */
+    .hero{text-align:center;padding:64px 32px 52px;border-bottom:0.5px solid #2A1040;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(192,79,255,0.1) 0%,transparent 70%);pointer-events:none;}
+    .hero-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#FF2D2D;margin-bottom:14px;}
+    .hero-title{font-family:'Orbitron',monospace;font-size:38px;font-weight:900;line-height:1.1;color:#C04FFF;margin-bottom:10px;}
+    .hero-title span{color:#FF2D2D;}
+    .hero-sub{font-size:14px;font-weight:300;color:#9A6FBB;margin-bottom:28px;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.7;}
+    .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .hero-btn{background:#C04FFF;color:#0A0510;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:2px;padding:13px 28px;border-radius:3px;cursor:pointer;border:none;text-transform:uppercase;transition:background 0.2s;}
+    .hero-btn:hover{background:#D47FFF;}
+    .hero-btn-wa{background:transparent;color:#25D366;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:2px;padding:13px 28px;border-radius:3px;cursor:pointer;border:0.5px solid #25D366;text-transform:uppercase;transition:all 0.2s;}
+    .hero-btn-wa:hover{background:#25D366;color:#0A0510;}
+
+    /* CATALOG */
+    .section-title{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C04FFF;padding:24px 28px 14px;border-bottom:0.5px solid #2A1040;}
+    .filters{display:flex;gap:8px;padding:12px 28px;flex-wrap:wrap;}
+    .filter-btn{font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:2px;cursor:pointer;border:0.5px solid #2A1040;background:transparent;color:#9A6FBB;font-family:'Exo 2',sans-serif;transition:all 0.2s;}
+    .filter-btn:hover{border-color:#C04FFF;color:#C04FFF;}
+    .filter-btn.active{background:#C04FFF;color:#0A0510;border-color:#C04FFF;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:1px;border-top:1px solid #2A1040;}
+    .card{background:#0D0718;padding:20px 16px;cursor:pointer;border:0.5px solid transparent;transition:all 0.2s;position:relative;display:flex;flex-direction:column;}
+    .card:hover{background:#130A22;border-color:#C04FFF;z-index:1;}
+    .card-icon{font-size:28px;margin-bottom:12px;line-height:1;}
+    .card-cat{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#FF2D2D;margin-bottom:4px;}
+    .card-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#C04FFF;margin-bottom:6px;line-height:1.3;}
+    .card-desc{font-size:11px;font-weight:300;color:#9A6FBB;line-height:1.6;flex:1;margin-bottom:12px;}
+    .card-bottom{display:flex;align-items:center;justify-content:space-between;}
+    .card-price{font-family:'Orbitron',monospace;font-size:13px;font-weight:900;color:#FF2D2D;}
+    .card-buy{font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:6px 10px;border:0.5px solid #C04FFF;color:#C04FFF;background:transparent;border-radius:2px;cursor:pointer;font-family:'Exo 2',sans-serif;transition:all 0.2s;}
+    .card-buy:hover{background:#C04FFF;color:#0A0510;}
+    .card-badge{position:absolute;top:10px;right:10px;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:2px;font-weight:500;}
+    .badge-new{background:#FF2D2D;color:#fff;}
+    .badge-hot{background:#C04FFF;color:#fff;}
+    .badge-rare{background:#7B00CC;color:#fff;}
+
+    /* MODAL */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px;}
+    .modal{background:#0D0718;border:0.5px solid #2A1040;border-radius:10px;padding:32px 28px;width:100%;max-width:420px;position:relative;}
+    .modal-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#C04FFF;letter-spacing:2px;margin-bottom:20px;text-transform:uppercase;}
+    .modal-close{position:absolute;top:14px;right:16px;background:transparent;border:none;color:#9A6FBB;font-size:18px;cursor:pointer;line-height:1;}
+    .modal-close:hover{color:#FF2D2D;}
+    .pix-box{background:#130A22;border:0.5px solid #2A1040;border-radius:6px;padding:16px;margin-bottom:16px;}
+    .pix-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#9A6FBB;margin-bottom:6px;}
+    .pix-key{font-size:11px;color:#C04FFF;word-break:break-all;font-family:'Exo 2',sans-serif;}
+    .pix-amount{font-family:'Orbitron',monospace;font-size:26px;font-weight:900;color:#FF2D2D;text-align:center;margin:16px 0;}
+    .pix-instructions{font-size:12px;color:#9A6FBB;line-height:1.8;margin-bottom:20px;}
+    .pix-instructions ol{margin-left:18px;}
+    .confirm-btn{width:100%;background:#25D366;color:#0A0510;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:2px;padding:13px;border-radius:4px;border:none;cursor:pointer;text-transform:uppercase;transition:background 0.2s;}
+    .confirm-btn:hover{background:#1EBE5B;}
+    .cancel-btn{width:100%;background:transparent;color:#9A6FBB;font-family:'Exo 2',sans-serif;font-size:11px;padding:10px;border-radius:4px;border:0.5px solid #2A1040;cursor:pointer;margin-top:8px;transition:all 0.2s;}
+    .cancel-btn:hover{border-color:#FF2D2D;color:#FF2D2D;}
+
+    /* CART */
+    .cart-list{max-height:220px;overflow-y:auto;margin-bottom:16px;}
+    .cart-item{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:0.5px solid #2A1040;font-size:12px;}
+    .cart-item-name{color:#F0E0FF;font-family:'Orbitron',monospace;font-size:10px;}
+    .cart-item-price{color:#FF2D2D;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;}
+    .cart-remove{background:transparent;border:none;color:#4A2A6A;cursor:pointer;font-size:14px;}
+    .cart-remove:hover{color:#FF2D2D;}
+    .cart-total{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:0.5px solid #2A1040;margin-bottom:16px;}
+    .cart-total-label{font-size:11px;color:#9A6FBB;letter-spacing:1px;text-transform:uppercase;}
+    .cart-total-val{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;color:#FF2D2D;}
+
+    /* ADM */
+    #adm-screen{display:none;min-height:100vh;background:#0A0510;}
+    .adm-nav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;border-bottom:0.5px solid #2A1040;background:#0D0718;}
+    .adm-nav-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#FF2D2D;letter-spacing:2px;}
+    .adm-body{padding:28px;}
+    .adm-title{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#C04FFF;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+    .adm-empty{font-size:12px;color:#4A2A6A;padding:20px 0;text-align:center;}
+    .order-card{background:#0D0718;border:0.5px solid #2A1040;border-radius:6px;padding:16px;margin-bottom:10px;}
+    .order-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+    .order-user{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#C04FFF;}
+    .order-time{font-size:10px;color:#4A2A6A;}
+    .order-items{font-size:11px;color:#9A6FBB;line-height:1.7;margin-bottom:8px;}
+    .order-total{font-family:'Orbitron',monospace;font-size:12px;font-weight:900;color:#FF2D2D;}
+    .order-status{display:inline-block;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:2px;font-weight:500;}
+    .status-pending{background:#FF2D2D22;color:#FF2D2D;border:0.5px solid #FF2D2D;}
+    .status-done{background:#25D36622;color:#25D366;border:0.5px solid #25D366;}
+    .order-actions{display:flex;gap:8px;margin-top:10px;}
+    .btn-done{font-size:10px;padding:5px 12px;border-radius:2px;cursor:pointer;border:0.5px solid #25D366;color:#25D366;background:transparent;font-family:'Exo 2',sans-serif;transition:all 0.2s;}
+    .btn-done:hover{background:#25D366;color:#0A0510;}
+    .btn-del{font-size:10px;padding:5px 12px;border-radius:2px;cursor:pointer;border:0.5px solid #FF2D2D;color:#FF2D2D;background:transparent;font-family:'Exo 2',sans-serif;transition:all 0.2s;}
+    .btn-del:hover{background:#FF2D2D;color:#0A0510;}
+    .adm-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px;}
+    .stat-card{background:#0D0718;border:0.5px solid #2A1040;border-radius:6px;padding:16px;text-align:center;}
+    .stat-val{font-family:'Orbitron',monospace;font-size:20px;font-weight:900;color:#C04FFF;}
+    .stat-label{font-size:10px;color:#9A6FBB;letter-spacing:1px;text-transform:uppercase;margin-top:4px;}
+
+    /* WA / FOOTER */
+    .wa-section{padding:40px 28px;border-top:0.5px solid #2A1040;text-align:center;}
+    .wa-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#C04FFF;margin-bottom:8px;}
+    .wa-sub{font-size:13px;font-weight:300;color:#9A6FBB;margin-bottom:24px;}
+    .wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#0A0510;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:1px;padding:14px 32px;border-radius:3px;cursor:pointer;border:none;text-transform:uppercase;transition:background 0.2s;}
+    .wa-btn:hover{background:#1EBE5B;}
+    .footer{padding:28px;border-top:0.5px solid #2A1040;text-align:center;}
+    .footer-logo{font-family:'Orbitron',monospace;font-size:13px;font-weight:900;color:#C04FFF;letter-spacing:2px;margin-bottom:6px;}
+    .footer-logo span{color:#FF2D2D;}
+    .footer-text{font-size:11px;color:#4A2A6A;}
+  </style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="auth-screen">
+  <div class="auth-box">
+    <div class="auth-logo">X-<span>SPACE</span> SAILOR</div>
+    <div class="auth-tagline">Sailor Piece · Roblox</div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">Entrar</button>
+      <button class="auth-tab" onclick="switchTab('register')">Cadastrar</button>
+    </div>
+    <div id="form-login">
+      <div class="auth-field"><label class="auth-label">Usuário</label><input class="auth-input" id="login-user" type="text" placeholder="seu usuário"/></div>
+      <div class="auth-field"><label class="auth-label">Senha</label><input class="auth-input" id="login-pass" type="password" placeholder="••••••••"/></div>
+      <button class="auth-btn" onclick="doLogin()">Entrar</button>
+      <div class="auth-error" id="login-error"></div>
+    </div>
+    <div id="form-register" style="display:none">
+      <div class="auth-field"><label class="auth-label">Usuário</label><input class="auth-input" id="reg-user" type="text" placeholder="seu usuário"/></div>
+      <div class="auth-field"><label class="auth-label">Senha</label><input class="auth-input" id="reg-pass" type="password" placeholder="••••••••"/></div>
+      <div class="auth-field"><label class="auth-label">Confirmar senha</label><input class="auth-input" id="reg-pass2" type="password" placeholder="••••••••"/></div>
+      <button class="auth-btn" onclick="doRegister()">Criar conta</button>
+      <div class="auth-error" id="reg-error"></div>
+      <div class="auth-success" id="reg-success"></div>
+    </div>
+    <div class="adm-link" onclick="switchTab('adm')" id="adm-link-show">Acesso administrativo</div>
+    <div id="form-adm" style="display:none">
+      <div class="auth-field"><label class="auth-label">Usuário ADM</label><input class="auth-input" id="adm-user" type="text" placeholder="admin"/></div>
+      <div class="auth-field"><label class="auth-label">Senha ADM</label><input class="auth-input" id="adm-pass" type="password" placeholder="••••••••"/></div>
+      <button class="auth-btn" style="background:#FF2D2D" onclick="doAdmLogin()">Entrar como ADM</button>
+      <div class="auth-error" id="adm-error"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SITE CLIENTE -->
+<div id="site" style="display:none">
+  <nav class="nav">
+    <div class="logo">X-<span>SPACE</span> SAILOR</div>
+    <div class="nav-links">
+      <span class="nav-link" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Catálogo</span>
+      <span class="nav-link" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Contato</span>
+      <button class="nav-wa" onclick="openWA()">WhatsApp</button>
+      <button class="cart-btn" onclick="openCart()">🛒 Carrinho <span class="cart-badge" id="cart-badge">0</span></button>
+      <span class="nav-user" id="nav-username"></span>
+      <button class="nav-logout" onclick="doLogout()">Sair</button>
+    </div>
+  </nav>
+  <div class="hero">
+    <div class="hero-tag">Sailor Piece · Roblox</div>
+    <div class="hero-title">X-<span>SPACE</span><br>SAILOR</div>
+    <div class="hero-sub">Rerolls, Bloodlines, Contas e muito mais — entrega rápida, compra segura via Pix!</div>
+    <div class="hero-btns">
+      <button class="hero-btn" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Ver catálogo</button>
+      <button class="hero-btn-wa" onclick="openWA()">Falar no WhatsApp</button>
+    </div>
+  </div>
+  <div id="catalog">
+    <div class="section-title">Catálogo de Itens</div>
+    <div class="filters">
+      <button class="filter-btn active" onclick="filter('all',this)">Todos</button>
+      <button class="filter-btn" onclick="filter('reroll',this)">Reroll</button>
+      <button class="filter-btn" onclick="filter('bloodline',this)">Bloodline</button>
+      <button class="filter-btn" onclick="filter('raca',this)">Raça</button>
+      <button class="filter-btn" onclick="filter('conta',this)">Contas</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+  <div id="contato" class="wa-section">
+    <div class="wa-title">Atendimento via WhatsApp</div>
+    <div class="wa-sub">Dúvidas ou pedido especial? Me chama!</div>
+    <button class="wa-btn" onclick="openWA()">💬 (66) 99273-3646</button>
+  </div>
+  <div class="footer">
+    <div class="footer-logo">X-<span>SPACE</span> SAILOR</div>
+    <div class="footer-text">© 2026 X-Space Sailor · Sailor Piece Roblox · Todos os direitos reservados</div>
+  </div>
+</div>
+
+<!-- ADM -->
+<div id="adm-screen">
+  <div class="adm-nav">
+    <div class="adm-nav-title">⚙ Painel ADM</div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <span style="font-size:11px;color:#9A6FBB;">Konai_01</span>
+      <button class="nav-logout" onclick="doLogout()">Sair</button>
+    </div>
+  </div>
+  <div class="adm-body">
+    <div class="adm-stats">
+      <div class="stat-card"><div class="stat-val" id="stat-total">0</div><div class="stat-label">Pedidos</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-pending">0</div><div class="stat-label">Pendentes</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-revenue">R$0</div><div class="stat-label">Receita</div></div>
+    </div>
+    <div class="adm-title">Pedidos recebidos</div>
+    <div id="adm-orders"></div>
+  </div>
+</div>
+
+<!-- MODAL CARRINHO -->
+<div class="modal-overlay" id="modal-cart" style="display:none">
+  <div class="modal">
+    <div class="modal-title">Carrinho</div>
+    <button class="modal-close" onclick="closeCart()">✕</button>
+    <div class="cart-list" id="cart-list"></div>
+    <div class="cart-total"><span class="cart-total-label">Total</span><span class="cart-total-val" id="cart-total">R$ 0,00</span></div>
+    <button class="confir
