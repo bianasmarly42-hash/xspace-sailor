@@ -186,27 +186,13 @@
   </div>
 </div>
 
-let mensagemPedido = "";
+<script>
+var WA = '5566992733646';
+var cart = [];
 
-function abrirContato(msg){
-  mensagemPedido = msg;
-  document.getElementById("contactModal").style.display = "flex";
-}
-
-function closeModal(){
-  document.getElementById("contactModal").style.display = "none";
-}
-
-function goWA(){
-  window.open('https://wa.me/5566992733646?text=' + encodeURIComponent(mensagemPedido));
-}
-
-function goDiscord(){
-  window.open('https://discord.gg/blossomsailor');
-}
-
-function goInsta(){
-  window.open('https://instagram.com/dolar_sadx');
+function openWA(item) {
+  var msg = item ? 'Olá! Tenho interesse: *' + item + '*' : 'Olá! Vim pelo site X-Space Sailor!';
+  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
 }
 
 var products = [
@@ -336,8 +322,6 @@ function closeSuccess() { document.getElementById('modal-success').style.display
 
 renderProducts(products);
 </script>
-<!-- MODAL CONTATO -->
-<div id="contactModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:999;align-items:center;justify-content:center;">
-  <div style="background:#111;padding:30px;border-radius:10px;text-align:center;border:1px solid #333;">
-    
-    <h3 style="color:#C04
+</body>
+</html>
+
