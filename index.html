@@ -186,20 +186,34 @@
   </div>
 </div>
 
-<script>
-var WA = '5566992733646';
-var cart = [];
+let mensagemPedido = "";
 
-function openWA(item) {
-  var msg = item ? 'Olá! Tenho interesse: *' + item + '*' : 'Olá! Vim pelo site X-Space Sailor!';
-  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
+function abrirContato(msg){
+  mensagemPedido = msg;
+  document.getElementById("contactModal").style.display = "flex";
+}
+
+function closeModal(){
+  document.getElementById("contactModal").style.display = "none";
+}
+
+function goWA(){
+  window.open('https://wa.me/5566992733646?text=' + encodeURIComponent(mensagemPedido));
+}
+
+function goDiscord(){
+  window.open('https://discord.gg/blossomsailor');
+}
+
+function goInsta(){
+  window.open('https://instagram.com/dolar_sadx');
 }
 
 var products = [
-  {id:1,  icon:'🎲', cat:'reroll',    name:'Race Reroll 15,000',         desc:'Reroll de raça. Troque sua raça atual por uma nova aleatória.', price:'R$ 0,99', val:0.99, badge:'hot'},
-  {id:2,  icon:'⚔️', cat:'reroll',    name:'Clan Reroll 5,000',         desc:'Reroll de clã. Novo clã, novas habilidades.',                   price:'R$ 0,99', val:0.99, badge:'hot'},
-  {id:3,  icon:'💎', cat:'bloodline', name:'Bloodline Stone 1,000',     desc:'Pedra especial para evoluir sua bloodline.',                    price:'R$ 0,99', val:0.99, badge:'rare'},
-  {id:4,  icon:'🧬', cat:'raca',      name:'aura chest 30x',           desc:'Garanta uma raça rara no seu personagem.',                      price:'R$ 0,99', val:0.99, badge:'rare'},
+  {id:1,  icon:'🎲', cat:'reroll',    name:'Race Reroll',         desc:'Reroll de raça. Troque sua raça atual por uma nova aleatória.', price:'R$ 0,99', val:0.99, badge:'hot'},
+  {id:2,  icon:'⚔️', cat:'reroll',    name:'Clan Reroll',         desc:'Reroll de clã. Novo clã, novas habilidades.',                   price:'R$ 0,99', val:0.99, badge:'hot'},
+  {id:3,  icon:'💎', cat:'bloodline', name:'Bloodline Stone',     desc:'Pedra especial para evoluir sua bloodline.',                    price:'R$ 0,99', val:0.99, badge:'rare'},
+  {id:4,  icon:'🧬', cat:'raca',      name:'Raça Rara',           desc:'Garanta uma raça rara no seu personagem.',                      price:'R$ 0,99', val:0.99, badge:'rare'},
   {id:5,  icon:'🌀', cat:'reroll',    name:'Reroll Pack x5',      desc:'5 rerolls para maximizar suas chances.',                        price:'R$ 0,99', val:0.99, badge:'new'},
   {id:6,  icon:'🏆', cat:'bloodline', name:'Bloodline Premium',   desc:'Bloodline de tier alto. Disponibilidade limitada.',             price:'R$ 0,99', val:0.99, badge:'rare'},
   {id:7,  icon:'👑', cat:'raca',      name:'Raça Lendária',       desc:'Uma das raças mais raras do jogo.',                             price:'R$ 0,99', val:0.99, badge:'rare'},
@@ -322,6 +336,8 @@ function closeSuccess() { document.getElementById('modal-success').style.display
 
 renderProducts(products);
 </script>
-</body>
-  </html>
-  
+<!-- MODAL CONTATO -->
+<div id="contactModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:999;align-items:center;justify-content:center;">
+  <div style="background:#111;padding:30px;border-radius:10px;text-align:center;border:1px solid #333;">
+    
+    <h3 style="color:#C04
